@@ -1,3 +1,3 @@
 .allure
 .idea
-target
+/target/
