@@ -1,0 +1,1 @@
+rest-autotest for user post,put,delete,get from https://gorest.co.in/
