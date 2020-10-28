@@ -1,10 +1,8 @@
 import conf.Conf;
 import entity.Response;
 import entity.User;
-import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.mapper.ObjectMapperType;
-import lombok.var;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -21,13 +19,11 @@ public class RestTest {
 
 
     @BeforeTest
-    @Step("init")
     public void init() {
         RestAssured.baseURI = Conf.getProperty("base_api_url");
     }
 
     @Test(priority = 3)
-    @Step("get user by id = {id}")
     public void getUserByID() {
         get("/users/{userID}", id).
                 then().
@@ -35,7 +31,6 @@ public class RestTest {
     }
 
     @Test(priority = 1)
-    @Step("create user")
     public void CreateUser() {
         Response response = given().
                 header("Authorization",token).
@@ -47,7 +42,6 @@ public class RestTest {
     }
 
     @Test(priority = 2)
-    @Step("update user name")
     public void UpdateUserName() {
         user.setName("Hello im changed");
         given().
@@ -60,7 +54,6 @@ public class RestTest {
     }
 
     @Test(priority = 4)
-    @Step("delete user")
     public void DeleteUser() {
         given().
                 header("Authorization",token).
