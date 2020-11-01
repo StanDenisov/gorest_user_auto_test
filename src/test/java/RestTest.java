@@ -1,11 +1,14 @@
 import conf.Conf;
 import entity.Response;
 import entity.User;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.mapper.ObjectMapperType;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -25,13 +28,15 @@ public class RestTest {
 
     @Test(priority = 3)
     public void getUserByID() {
+        step("Get User by id");
         get("/users/{userID}", id).
                 then().
                 statusCode(200);
     }
 
     @Test(priority = 1)
-    public void CreateUser() {
+    public void createUser() {
+        step("Create user using post");
         Response response = given().
                 header("Authorization",token).
                 contentType("application/json").
@@ -42,7 +47,8 @@ public class RestTest {
     }
 
     @Test(priority = 2)
-    public void UpdateUserName() {
+    public void updateUserName() {
+        step("Update user by using put");
         user.setName("Hello im changed");
         given().
                 header("Authorization",token).
@@ -54,7 +60,8 @@ public class RestTest {
     }
 
     @Test(priority = 4)
-    public void DeleteUser() {
+    public void deleteUser() {
+        step("Delete user");
         given().
                 header("Authorization",token).
                 contentType("application/json").
