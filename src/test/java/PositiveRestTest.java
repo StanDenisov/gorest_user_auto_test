@@ -14,7 +14,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 
-public class RestTest {
+public class PositiveRestTest {
 
     String token = Conf.getProperty("access_token");
     Integer id;
@@ -31,7 +31,8 @@ public class RestTest {
         step("Get User by id");
         get("/users/{userID}", id).
                 then().
-                statusCode(200);
+                statusCode(200).
+                body("code", equalTo(200));
     }
 
     @Test(priority = 1)
